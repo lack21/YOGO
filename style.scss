@@ -1,0 +1,459 @@
+// lear
+// Yogo
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+// Colors
+$lightColor: #f8f9fa;
+$darkColor: #1f1f1f;
+$lightPurple: #6f0fdf6f;
+$darkPurple: #6f0fdf;
+
+// Global Styles
+body {
+  background-color: $lightColor;
+  color: $darkColor;
+  transition: 0.5s;
+}
+
+.dark-body {
+  background-color: $darkColor;
+  color: $lightColor;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: $darkPurple #eee;
+}
+
+.sub-heading {
+  text-align: center;
+  font-size: 2rem;
+  padding: 5rem 0 1rem;
+}
+
+.desc-text {
+  text-align: center;
+}
+
+.text {
+  color: gray;
+}
+
+// Button Mixin
+@mixin Button($color1, $color2, $color3) {
+  text-decoration: none;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  text-align: center;
+  background-color: $color1;
+  color: $color2;
+  border: 3px solid $color1;
+  border-radius: 5px;
+  width: 170px;
+  padding: 0.7rem;
+  transition: 0.5s;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: $color3;
+    z-index: -1;
+    transition: 0.5s;
+  }
+
+  &:hover {
+    color: $color1;
+
+    &::after {
+      width: 180px;
+      height: 180px;
+    }
+  }
+}
+
+.btn-1 {
+  @include Button($lightColor, $darkColor, $darkPurple);
+}
+
+.btn-2 {
+  @include Button($darkPurple, $darkColor, $lightColor);
+  border-color: $lightColor;
+  color: $lightColor;
+
+  &:hover {
+    color: $darkColor;
+  }
+}
+
+.btn-3 {
+  @include Button($darkPurple, $lightColor, $darkPurple);
+  &::after {
+    background-color: $lightColor;
+  }
+}
+
+// Header Section
+#header {
+  height: 100vh;
+  background-color: $darkPurple;
+  position: relative;
+
+  // Navigation
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 5%;
+
+    .fa {
+      cursor: pointer;
+      color: $lightColor;
+      font-size: 1.4rem;
+      display: none;
+    }
+
+    .links {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      list-style: none;
+
+      .link {
+        display: inline-block;
+
+        &::after {
+          content: "";
+          width: 0;
+          height: 0.1rem;
+          background-color: $lightColor;
+          transition: 0.5s;
+          display: block;
+          margin: auto;
+        }
+
+        &:hover::after {
+          width: 100%;
+        }
+
+        a {
+          text-decoration: none;
+          color: $lightColor;
+        }
+      }
+    }
+  }
+
+  // Content
+  .content {
+    display: grid;
+    height: 70%;
+    align-content: center;
+    grid-gap: 2rem;
+    color: $lightColor;
+    padding-left: 5%;
+
+    .title {
+      font-size: 3.5rem;
+    }
+
+    .content-btns {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
+  .home-pic {
+    position: absolute;
+    bottom: 0;
+    right: 10%;
+    max-width: 450px;
+  }
+}
+
+// Services Section
+#services {
+  max-width: 90%;
+  margin: auto;
+
+  .services-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 4rem 0;
+
+    .services-item {
+      width: 430px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 5px;
+      padding: 4rem 2rem;
+      transition: 0.5s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $darkPurple;
+        color: $lightColor;
+
+        p {
+          color: $lightColor;
+        }
+      }
+
+      &:nth-child(2) {
+        background-color: $darkPurple;
+        color: $lightColor;
+      }
+
+      img {
+        width: 64px;
+      }
+
+      h3 {
+        margin: 3rem 0;
+      }
+
+      p {
+        margin-bottom: 3rem;
+        transition: 0.5s;
+      }
+
+      .fa {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+// Banner Section
+#pricing {
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+  margin: auto;
+
+  .pricing-item {
+    padding: 8rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    gap: 3rem;
+
+    img {
+      width: min(480px, 90vw);
+    }
+
+    .banner-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      h3 {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+// Testimonials Section
+#about {
+  overflow: hidden;
+  text-align: center;
+
+  .about-row {
+    display: flex;
+    justify-content: space-between;
+    width: 300vw;
+    transition: 0.5s;
+
+    .about-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      padding: 2rem;
+      width: min(800px, 90vw);
+      margin: 6rem auto 2rem;
+      background-color: #fff;
+      box-shadow: 0 0 0.5rem $lightPurple;
+      position: relative;
+
+      img {
+        width: 140px;
+        border-radius: 50%;
+        margin: -6rem auto 0;
+      }
+
+      h3 {
+        margin: 0.5rem 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.3rem;
+        font-weight: normal;
+        color: $darkColor;
+      }
+
+      h4 {
+        margin-bottom: 2.5rem;
+        font-weight: normal;
+      }
+    }
+  }
+
+  .slider {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+
+    .slide-btn {
+      width: 40px;
+      height: 5px;
+      background-color: $lightPurple;
+      cursor: pointer;
+
+      &.active {
+        background-color: $darkPurple;
+      }
+    }
+  }
+}
+
+// Footer Section
+#contact {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  background-color: $darkPurple;
+  margin-top: 5rem;
+  gap: 2rem;
+
+  .sub-heading {
+    color: $lightColor;
+  }
+
+  .email-input {
+    width: min(600px, 90vw);
+    background-color: transparent;
+    color: $lightColor;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid $lightColor;
+    padding: 0.5rem;
+    margin-top: 2rem;
+
+    &::placeholder {
+      text-align: center;
+    }
+  }
+
+  p {
+    margin: 2rem 0 1rem;
+    color: $lightColor;
+  }
+}
+
+// Switch Button
+.switch-btn {
+  display: grid;
+  place-content: center;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: $darkPurple;
+  color: $lightColor;
+  border: none;
+  cursor: pointer;
+
+  .fa {
+    font-size: 1.3rem;
+  }
+}
+
+// For Smaller Devices
+@media screen and (max-width: 1048px) {
+  .content {
+    place-content: center;
+    padding-left: 0 !important;
+    text-align: center;
+
+    .content-btns {
+      justify-content: center;
+    }
+  }
+
+  .home-pic {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 948px) {
+  .pricing-item img {
+    width: min(400px, 90vw);
+  }
+}
+
+@media screen and (max-width: 824px) {
+  .pricing-item {
+    flex-direction: column;
+  }
+
+  #about img {
+    width: 120px !important;
+  }
+
+  .links {
+    position: fixed;
+    top: 0;
+    right: -160px;
+    width: 160px;
+    height: 100vh;
+    background-color: $darkPurple;
+    flex-direction: column;
+    gap: 1.5rem !important;
+    align-items: flex-start !important;
+    padding: 1rem;
+    transition: 0.5s;
+    z-index: 999;
+  }
+
+  .nav-bar .fa {
+    display: block !important;
+  }
+}
+
+@media screen and (max-width: 678px) {
+  .title {
+    font-size: 3rem !important;
+  }
+
+  .sub-heading,
+  .pricing-item h3 {
+    font-size: 1.8rem !important;
+  }
+
+  .logo {
+    width: 150px;
+  }
+}
